@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: house-price-prediction
-  labels:
-    name: house-price-prediction
-    app.kubernetes.io/part-of: ml-applications
-  annotations:
-    argocd.argoproj.io/sync-wave: "0"
