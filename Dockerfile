@@ -4,10 +4,11 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy the requirements file
-COPY app/requirements.txt /app/
+COPY requirements.txt /app/
 
 # Install the dependencies
 RUN pip install -r requirements.txt
+RUN pip install altair
 
 # Copy the application code
 COPY . /app/

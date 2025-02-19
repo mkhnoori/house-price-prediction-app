@@ -3,16 +3,13 @@ import pandas as pd
 import joblib
 import numpy as np
 
-# Load the trained model
-model = joblib.load('house_price_model.pkl')
+# Load model and preprocessor
+model = joblib.load('models/house_price_model.pkl')
+preprocessor = joblib.load('models/preprocessor.pkl')
 
-# Load the preprocessor
-preprocessor = joblib.load('preprocessor.pkl')
-
-# Define the input fields
 st.title('House Price Prediction')
 
-# Input fields
+# Input fields for user
 lot_area = st.number_input('Lot Area', value=5000)
 overall_qual = st.number_input('Overall Qual', min_value=1, max_value=10, value=5)
 year_built = st.number_input('Year Built', value=1990)
@@ -22,15 +19,22 @@ full_bath = st.number_input('Full Bath', value=2)
 gr_liv_area = st.number_input('Gr Liv Area', value=1500)
 garage_cars = st.number_input('Garage Cars', value=1)
 
-# Create a DataFrame for the input features
+# Convert input into DataFrame
 input_data = pd.DataFrame({
-    # ... (same as the original code)
+    'Lot Area': [lot_area],
+    'Overall Qual': [overall_qual],
+    'Year Built': [year_built],
+    'Total Bsmt SF': [total_bsmt_sf],
+    '1st Flr SF': [first_flr_sf],
+    'Full Bath': [full_bath],
+    'Gr Liv Area': [gr_liv_area],
+    'Garage Cars': [garage_cars]
 })
 
-# Preprocess the input features
+# Preprocess input
 input_features_preprocessed = preprocessor.transform(input_data)
 
-# Predict and display the output
+# Predict
 if st.button('Predict'):
     prediction = model.predict(input_features_preprocessed)
     st.write(f'Predicted House Price: ${prediction[0]:,.2f}')
