@@ -7,12 +7,12 @@ pipeline {
         DOCKER_CREDENTIALS = credentials('docker-cred')
         SCANNER_HOME = tool 'sonar-scanner'
         SONAR_PROJECT_KEY = 'house-price-prediction'
-        PYTHON_HOME = tool 'Python-3.11'
+        PYTHON_HOME = tool 'Python3'
     }
     
     tools {
         // Use the exact name configured in Jenkins
-        python 'Python-3.11'
+        python 'Python3'
     }
     
     stages {
@@ -36,10 +36,10 @@ pipeline {
                     
                     sh '''
                         # Verify Python installation
-                        python3.11 --version
+                        python3 --version
                         
                         # Create virtual environment
-                        python3.11 -m venv .venv
+                        python3 -m venv .venv
                         
                         # Activate virtual environment and install dependencies
                         . .venv/bin/activate
